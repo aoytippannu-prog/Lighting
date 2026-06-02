@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายงานผลการตรวจวัดความเข้มของแสงสว่างตามกฎหมาย - IMS Compliance</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Sarabun) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        /* สไตล์สำหรับการแสดงผลเครื่องพิมพ์และ Export PDF */
+        @media print {
+            @page {
+                size: A4;
+                margin: 12mm 12mm 12mm 12mm;
+            }
+            body {
+                background-color: #ffffff;
+                color: #000000;
+                font-size: 12px;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .shadow-lg, .shadow-md, .shadow-sm {
+                box-shadow: none !important;
+            }
+            .border-gray-200, .border-gray-300 {
+                border-color: #94a3b8 !important;
+            }
+            input, select, textarea {
+                border: none !important;
+                background: transparent !important;
+                appearance: none !important;
+                -webkit-appearance: none !important;
+                padding: 0 !important;
+                resize: none !important;
+                color: #000000 !important;
+                font-weight: bold;
+            }
+            /* บังคับไม่ให้ข้อมูลการ์ดจุดตรวจเกิดการฉีกขาดข้ามหน้ากระดาษ */
+            .page-block {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            .print-border-b {
+                border-bottom: 1px solid #475569 !important;
+            }
+            .print-header {
+                display: flex !important;
+                border-bottom: 2px solid #0f172a;
+                padding-bottom: 10px;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body class="text-slate-800 p-2 md:p-6">
+    <div class="max-w-6xl mx-auto">
+        
+        <!-- ส่วนควบคุมหลักด้านบน (ซ่อนเมื่อพิมพ์) -->
+        <header class="no-print bg-white rounded-xl shadow-md p-6 mb-6 border-l-4 border-blue-700">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold text-slate-900 flex items-center gap-2">
+                        <svg class="text-amber-500 w-8 h-8 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path>
+                        </svg>
+                        ระบบบันทึกรายงานผลการตรวจวัดแสงสว่างในการทำงาน
+                    </h1>
+                    <p class="text-xs text-slate-600 mt-1">
+                        อ้างอิง: ประกาศกรมสวัสดิการและคุ้มครองแรงงาน เรื่อง มาตรฐานความเข้มของแสงสว่าง พ.ศ. ๒๕๖๐
+                    </p>
+                    <span class="inline-flex items-center gap-1.5 py-0.5 px-2.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 mt-2">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        ได้รับการรับรองระบบตามเกณฑ์มาตรฐานสากล IMS Audit (ISO 45001 / ISO 14001)
+                    </span>
+                </div>
+                <div class="flex flex-wrap gap-2 shrink-0">
+                    <button onclick="window.print()" class="bg-blue-700 hover:bg-blue-800 text-white font-medium py-2.5 px-5 rounded-lg flex items-center gap-2 transition duration-200 shadow-sm text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                        พิมพ์รายงาน / บันทึก PDF
+                    </button>
+                    <button onclick="resetForm()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-2.5 px-4 rounded-lg flex items-center gap-2 transition duration-200 border border-slate-300 text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8H17"></path></svg>
+                        เคลียร์ข้อมูลใหม่
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- เอกสารรายงานหลัก (A4 Container) -->
+        <div class="bg-white rounded-xl shadow-lg p-6 md:p-10 border border-slate-200 relative">
+            
+            <!-- ส่วนตราสัญลักษณ์บริษัทและหัวรายงานทางการ -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center pb-6 border-b-2 border-slate-300">
+                <div class="text-center md:text-left">
+                    <div class="border-2 border-dashed border-slate-300 rounded-lg p-4 inline-block w-40 h-24 flex items-center justify-center cursor-pointer hover:bg-slate-50 no-print relative" onclick="document.getElementById('companyLogo').click()">
+                        <div id="logoPlaceholder" class="text-center text-xs text-slate-500">
+                            <svg class="mx-auto w-6 h-6 mb-1 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            อัปโหลดโลโก้หน่วยงาน
+                        </div>
+                        <img id="logoPreview" class="hidden max-h-full max-w-full object-contain" />
+                        <input type="file" id="companyLogo" class="hidden" accept="image/*" onchange="previewLogo(this)" />
+                    </div>
+                    <!-- ตราสำหรับพิมพ์กรณีอัปโหลดรูปภาพ -->
+                    <div class="hidden print:block w-32 h-20">
+                        <img id="logoPrint" class="max-h-full max-w-full object-contain" style="display:none;" />
+                        <span id="logoPrintText" class="text-sm font-bold text-slate-400">[โลโก้บริษัท]</span>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <h2 class="text-lg md:text-xl font-bold text-slate-950">รายงานการตรวจประเมินความเข้มแสงสว่าง</h2>
+                    <p class="text-xs font-semibold text-slate-500 uppercase mt-0.5 tracking-wider">Illumination Survey & Assessment Report</p>
+                    <span class="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded-full mt-2 inline-block font-medium border border-slate-200">มาตรฐานความปลอดภัย และอาชีวอนามัย (IMS-SHE-STANDARD)</span>
+                </div>
+                
+                <div class="space-y-2 text-sm text-slate-600 md:text-right">
+                    <div>
+                        <label class="font-semibold">วันที่ตรวจวัด:</label>
+                        <input type="date" id="surveyDate" class="w-2/3 md:w-36 border-b border-slate-300 focus:border-blue-500 focus:outline-none px-1 text-center print-border-b">
+                    </div>
+                    <div>
+                        <label class="font-semibold">วันที่รายงาน:</label>
+                        <input type="date" id="reportDate" class="w-2/3 md:w-36 border-b border-slate-300 focus:border-blue-500 focus:outline-none px-1 text-center print-border-b">
+                    </div>
+                </div>
+            </div>
+
+            <!-- ส่วนที่ 1: ข้อมูลทั่วไปของหน่วยงานและผู้เกี่ยวข้อง -->
+            <div class="mt-6 page-block">
+                <h3 class="text-base font-bold text-blue-950 border-b border-blue-200 pb-1 mb-4 flex items-center gap-1.5">
+                    <svg class="w-5 h-5 text-blue-700 no-print shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-12 0 9 9 0 0112 0z"></path></svg>
+                    ๑. ข้อมูลทั่วไปและรายละเอียดเครื่องมือวัด (General Information & Equipment details)
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-2">
+                            <span class="font-semibold w-44 shrink-0">แผนก / พื้นที่ปฏิบัติงานที่เข้าตรวจ:</span>
+                            <input type="text" class="w-full border-b border-slate-300 focus:border-blue-500 focus:outline-none pb-1 print-border-b font-medium" placeholder="เช่น แผนกคลังสินค้า อาคาร B">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-semibold w-44 shrink-0">ผู้ประเมิน / ตรวจวัด:</span>
+                            <input type="text" class="w-full border-b border-slate-300 focus:border-blue-500 focus:outline-none pb-1 print-border-b font-medium" placeholder="ระบุชื่อและนามสกุลผู้ตรวจสอบ">
+                        </div>
+                        <!-- ย้ายช่องผู้ร้องขอให้มาแสดงผลใน ส่วนที่ 1 ตามคำขออย่างเป็นทางการ -->
+                        <div class="flex items-center gap-2 bg-blue-50/50 p-1.5 rounded border border-blue-100">
+                            <span class="font-semibold text-blue-950 w-44 shrink-0">ผู้ร้องขอตรวจวัด / เจ้าของพื้นที่:</span>
+                            <input type="text" class="w-full border-b border-blue-300 focus:border-blue-500 focus:outline-none pb-1 print-border-b font-bold text-blue-900" placeholder="ระบุชื่อเจ้าของพื้นที่ / ผู้ร้องขอ">
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-2">
+                            <span class="font-semibold w-40 shrink-0">เครื่องมือตรวจวัด (Equipment):</span>
+                            <input type="text" class="w-full border-b border-slate-300 focus:border-blue-500 focus:outline-none pb-1 print-border-b" placeholder="เช่น Lux Meter" value="Digital Lux Meter">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-semibold w-40 shrink-0">รหัสเครื่องมือ (Serial No.):</span>
+                            <input type="text" class="w-full border-b border-slate-300 focus:border-blue-500 focus:outline-none pb-1 print-border-b" placeholder="ระบุ S/N ของเครื่อง" value="LM-2026-991">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-semibold w-40 shrink-0">วันที่สอบเทียบเครื่องมือ (Cal Date):</span>
+                            <input type="date" id="calDate" class="w-full border-b border-slate-300 focus:border-blue-500 focus:outline-none pb-1 print-border-b">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ส่วนที่ 2: ตารางบันทึกจุดที่ตรวจวัดแสงสว่าง -->
+            <div class="mt-8">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-blue-200 pb-2 mb-4 gap-2">
+                    <h3 class="text-base font-bold text-blue-950 flex items-center gap-1.5">
+                        <svg class="w-5 h-5 text-blue-700 no-print shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                        ๒. บันทึกผลการตรวจวัดความเข้มแสงสว่างและประเมินตามกฎหมาย (Survey Records)
+                    </h3>
+                    <button type="button" onclick="addMeasurementPoint()" class="no-print bg-green-600 hover:bg-green-700 text-white text-xs font-semibold py-2 px-4 rounded-lg flex items-center gap-1.5 transition duration-200 shadow-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                        เพิ่มจุดตรวจวัดใหม่ (+)
+                    </button>
+                </div>
+
+                <!-- จุดแสดงการ์ดตรวจวัด -->
+                <div id="pointsContainer" class="space-y-6">
+                    <!-- ข้อมูลจุดที่ตรวจวัดจะเรนเดอร์อัตโนมัติด้วย JavaScript -->
+                </div>
+            </div>
+
+            <!-- ส่วนที่ 3: สรุปรายงานสถานะทั้งหมด -->
+            <div class="mt-8 border border-slate-300 rounded-xl p-5 bg-slate-50/70 page-block">
+                <h3 class="text-sm font-bold text-slate-800 mb-3 flex items-center gap-2">
+                    <svg class="text-blue-700 w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                    บทสรุปการประเมินภาพรวม (Summary of Assessment)
+                </h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+                    <div class="bg-white p-3 rounded-lg shadow-sm border border-slate-200">
+                        <p class="text-[11px] text-slate-500">จำนวนจุดตรวจทั้งหมด</p>
+                        <p class="text-xl font-bold text-blue-800" id="totalPoints">0</p>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg shadow-sm border border-slate-200">
+                        <p class="text-[11px] text-slate-500">ผ่านมาตรฐานทั้งหมด</p>
+                        <p class="text-xl font-bold text-emerald-600" id="passedPoints">0</p>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg shadow-sm border border-slate-200">
+                        <p class="text-[11px] text-slate-500">ไม่ผ่านมาตรฐาน (ปรับปรุง)</p>
+                        <p class="text-xl font-bold text-red-500" id="failedPoints">0</p>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg shadow-sm border border-slate-200 flex flex-col justify-center items-center">
+                        <p class="text-[11px] text-slate-500">ภาพรวมการประเมิน</p>
+                        <span id="overallStatus" class="mt-1 px-3 py-1 rounded text-[11px] font-bold bg-slate-100 text-slate-600">
+                            -
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ส่วนเสนอแนะการปรับปรุงโดยรวม -->
+            <div class="mt-6 page-block">
+                <h3 class="text-sm font-bold text-slate-900 mb-2 flex items-center gap-1.5">
+                    <svg class="w-5 h-5 text-amber-500 no-print" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    ๓. ข้อเสนอแนะทั่วไปของวิศวกรความปลอดภัย / ผู้ประเมิน (Safety Action Plan & Recommendations)
+                </h3>
+                <textarea class="w-full border border-slate-300 rounded-lg p-3 text-xs focus:border-blue-500 focus:outline-none min-h-[90px]" placeholder="ระบุแผนการดำเนินการแก้ไขภาพรวมตามระบบมาตรฐาน IMS เช่น ส่งเรื่องประสานแผนกวิศวกรรมบำรุงรักษาเพื่อเปลี่ยนทดแทนหลอดเสื่อมสภาพ, ปรับทิศทางการเอียงของแสงส่องทางสัญจรให้อยู่ในระดับปลอดภัยสูงสุด..."></textarea>
+            </div>
+
+            <!-- ส่วนที่ 4: ลายมือชื่อผู้รับผิดชอบการรายงาน (ปรับแต่งเฉพาะผู้ตรวจวัดและเพิ่มช่องอัปโหลดลายเซ็น) -->
+            <div class="mt-10 pt-8 border-t-2 border-slate-300 page-block max-w-lg mx-auto">
+                <div class="flex flex-col items-center justify-center p-5 border border-dashed border-slate-300 rounded-xl bg-slate-50">
+                    <p class="text-xs font-bold text-slate-700 mb-3 text-center uppercase tracking-wider">ลงชื่อผู้ประเมินและผู้รายงานผล (Inspector Signature)</p>
+                    
+                    <!-- ส่วนควบคุมการลงนาม: เลือกระหว่างวาดสด หรืออัปโหลดไฟล์รูป -->
+                    <div class="no-print w-full flex justify-center gap-4 mb-4">
+                        <button type="button" onclick="switchSignatureMode('draw')" id="btnSigDraw" class="px-3 py-1 bg-blue-700 text-white rounded text-xs font-semibold transition hover:bg-blue-800">
+                            วาดบนหน้าจอ
+                        </button>
+                        <button type="button" onclick="switchSignatureMode('upload')" id="btnSigUpload" class="px-3 py-1 bg-slate-200 text-slate-700 rounded text-xs font-semibold transition hover:bg-slate-300">
+                            อัปโหลดรูปภาพลายเซ็น
+                        </button>
+                    </div>
+
+                    <!-- พื้นที่วาดลายเซ็น (Canvas) -->
+                    <div id="sigDrawContainer" class="no-print bg-white border border-slate-300 rounded-lg relative" style="width: 280px; height: 125px;">
+                        <canvas id="sigCanvas" width="280" height="125" class="cursor-crosshair"></canvas>
+                        <button type="button" onclick="clearSignature()" class="absolute top-1.5 right-1.5 bg-red-100 hover:bg-red-200 text-red-600 text-[10px] py-0.5 px-2 rounded font-medium transition duration-150">
+                            ล้างลายเซ็น
+                        </button>
+                    </div>
+
+                    <!-- พื้นที่อัปโหลดรูปภาพลายเซ็น -->
+                    <div id="sigUploadContainer" class="no-print hidden flex-col items-center justify-center bg-white border border-slate-300 border-dashed rounded-lg p-3 w-[280px] h-[125px] hover:bg-slate-50 transition cursor-pointer" onclick="document.getElementById('sigFile').click()">
+                        <svg class="w-8 h-8 text-slate-400 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                        <span class="text-[11px] text-slate-500 font-medium">คลิกเพื่ออัปโหลดไฟล์รูปภาพลายเซ็น</span>
+                        <input type="file" id="sigFile" class="hidden" accept="image/*" onchange="previewSignatureFile(this)">
+                    </div>
+
+                    <!-- ภาพผลลัพธ์ลายเซ็น สำหรับพิมพ์ และพรีวิว -->
+                    <div class="mt-3 border-b border-slate-400 w-48 h-16 flex items-center justify-center">
+                        <img id="sigImage" class="max-h-full max-w-full object-contain hidden" />
+                        <span id="sigPlaceholder" class="text-xs text-slate-400 font-mono">(ไม่มีข้อมูลลายมือชื่อ)</span>
+                    </div>
+                    
+                    <div class="text-center mt-3 text-sm space-y-1 w-full">
+                        <input type="text" class="w-full text-center border-b border-slate-300 focus:outline-none print-border-b font-semibold" placeholder="(พิมพ์ชื่อ-นามสกุลจริง)">
+                        <div class="text-center text-xs text-slate-500">เจ้าหน้าที่ความปลอดภัยในการทำงานวิชาชีพ / ผู้รับผิดชอบรายงาน</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ท้ายรายงานทางการ -->
+            <div class="mt-8 text-center text-[10px] text-slate-400 border-t border-slate-200 pt-3">
+                เอกสารนี้ควบคุมและอนุมัติให้เป็นบันทึกคุณภาพระดับปลอดภัย เพื่อประเมินในระบบงานมาตรฐาน IMS (ISO 45001 / ISO 14001)
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ข้อมูลกฎหมาย (Database) -->
+    <script>
+        // กฎหมายตาราง 1: พื้นที่ทั่วไป
+        const AREA_STANDARDS = [
+            { id: "a1", name: "ทางสัญจรภาวะฉุกเฉิน (ทางออกฉุกเฉิน/หนีไฟ)", avg: 60, min: null, category: "ทางสัญจรฉุกเฉิน" },
+            { id: "a2", name: "ภายนอกอาคาร: ลานจอดรถ ทางเดิน บันได", avg: 50, min: 25, category: "ภายนอกอาคาร" },
+            { id: "a3", name: "ภายนอกอาคาร: ประตูทางเข้าใหญ่", avg: 50, min: null, category: "ภายนอกอาคาร" },
+            { id: "a4", name: "ภายในอาคาร: ทางเดิน บันได ทางเข้าห้องโถง", avg: 100, min: 50, category: "ภายในอาคาร" },
+            { id: "a5", name: "ภายในอาคาร: ลิฟต์", avg: 100, min: null, category: "ภายในอาคาร" },
+            { id: "a6", name: "ห้องพักฟื้นสำหรับการปฐมพยาบาล ห้องพักผ่อน", avg: 50, min: 25, category: "พื้นที่ใช้ประโยชน์ทั่วไป" },
+            { id: "a7", name: "ป้อมยาม", avg: 100, min: null, category: "พื้นที่ใช้ประโยชน์ทั่วไป" },
+            { id: "a8", name: "ห้องสุขา ห้องอาบน้ำ ห้องเปลี่ยนเสื้อผ้า ล็อบบี้ ห้องเก็บของ", avg: 100, min: 50, category: "พื้นที่ใช้ประโยชน์ทั่วไป" },
+            { id: "a9", name: "โรงอาหาร ห้องปรุงอาหาร ห้องตรวจรักษา", avg: 300, min: 150, category: "พื้นที่ใช้ประโยชน์ทั่วไป" },
+            { id: "a10", name: "สำนักงาน: ห้องทำงาน ห้องฝึกอบรม ห้องประชุม โต๊ะต้อนรับ", avg: 300, min: 150, category: "พื้นที่ใช้ประโยชน์ในสำนักงาน" },
+            { id: "a11", name: "กระบวนการผลิต: ห้องเก็บวัตถุดิบ ห้องอบแห้ง โรงซักรีด", avg: 100, min: 50, category: "พื้นที่ในกระบวนการผลิต" },
+            { id: "a12", name: "กระบวนการผลิต: จุดขนถ่ายสินค้า คลังสินค้า โกดัง", avg: 200, min: 100, category: "พื้นที่ในกระบวนการผลิต" },
+            { id: "a13", name: "กระบวนการผลิต: อาคารหม้อน้ำ ห้องควบคุม ห้องสวิตซ์", avg: 200, min: 100, category: "พื้นที่ในกระบวนการผลิต" },
+            { id: "a14", name: "กระบวนการผลิต: เตรียมวัตถุดิบ บรรจุภัณฑ์ ทำงานกับเครื่องจักร ก่อสร้าง ขุดเจาะ ทาสี", avg: 300, min: 150, category: "พื้นที่ในกระบวนการผลิต" }
+        ];
+
+        // กฎหมายตาราง 2: เฉพาะจุดสายตามอง
+        const SPOT_STANDARDS = [
+            { id: "s1", name: "งานหยาบ (ชิ้นงาน > 750 ไมโครเมตร, ตรวจงานหยาบ, ซักรีด, ประกอบสิ่งของใหญ่)", minRequired: 200, desc: "งานหยาบ" },
+            { id: "s2", name: "งานละเอียดเล็กน้อย (ชิ้นงานปานกลาง เช่น รับจ่ายเสื้อผ้า ทำไม้ปานกลาง บรรจุขวด ทำอาหาร)", minRequired: 400, desc: "งานละเอียดเล็กน้อย" },
+            { id: "s3", name: "งานประจำในสำนักงานทั่วไป (งานเขียน งานพิมพ์ ป้อนข้อมูล อ่านและประมวลผล)", minRequired: 400, desc: "งานสำนักงานทั่วไป" },
+            { id: "s4", name: "งานทำงานไม้ละเอียด, งานทอผ้าสีอ่อน/ทอละเอียด, ตรวจแผ่นเหล็ก", minRequired: 500, desc: "งานละเอียดเล็กน้อยถึงปานกลาง" },
+            { id: "s5", name: "งานละเอียดปานกลาง (พ่นสี ตกแต่งสี ขัดผิวละเอียด พิสูจน์อักษร ตรวจรถยนต์ขั้นสุดท้าย)", minRequired: 500, desc: "งานละเอียดปานกลาง" },
+            { id: "s6", name: "งานละเอียดปานกลางพิเศษ (ออกแบบเขียนแบบไม่ใช้คอม, ตรวจอาหารกระป๋อง, คัดน้ำตาล)", minRequired: 600, desc: "งานละเอียดปานกลางพิเศษ" },
+            { id: "s7", name: "งานละเอียดสูง (ปรับเทียบเครื่องมือวัด, ตกแต่งสีชิ้นงานละเอียดสูง, ย้อมสีละเอียด)", minRequired: 700, desc: "งานละเอียดสูง" },
+            { id: "s8", name: "งานละเอียดสูงมาก (ตัดเย็บเสื้อผ้าด้วยมือ, เทียบสีหนังสีเข้ม, ทอผ้าสีเข้ม, ร้อยตะกร้อ)", minRequired: 800, desc: "งานละเอียดสูงมาก" },
+            { id: "s9", name: "งานละเอียดสูงมากระดับเครื่องจักร/ชิ้นส่วนจิ๋ว (< 25 ไมโครเมตร, ตรวจสอบซ่อมแซมสิ่งทอสีอ่อน)", minRequired: 1200, desc: "งานละเอียดสูงมาก" },
+            { id: "s10", name: "งานละเอียดสูงมากเป็นพิเศษ (ตรวจสอบงานเล็กมาก, เจียระไนเพชรพลอย, ทำนาฬิกา, งานผ่าตัด/ทันตกรรม)", minRequired: 2400, desc: "งานละเอียดสูงมากเป็นพิเศษ" }
+        ];
+
+        // สัดส่วนค่าความสว่างตารางที่ 3
+        function getSurroundingMinLimits(spotLimit) {
+            if (spotLimit <= 1000) return [spotLimit, 300, 200];
+            if (spotLimit > 1000 && spotLimit <= 2000) return [spotLimit, 300, 200];
+            if (spotLimit > 2000 && spotLimit <= 5000) return [spotLimit, 600, 300];
+            if (spotLimit > 5000 && spotLimit <= 10000) return [spotLimit, 1000, 400];
+            if (spotLimit > 10000) return [spotLimit, 3000, 600];
+            return [spotLimit, 300, 200];
+        }
+    </script>
+
+    <!-- ลอจิกการทำงานและควบคุมฟอร์มบนเว็บไซต์ -->
+    <script>
+        let pointCount = 0;
+        let sigCanvas, ctx;
+        let drawing = false;
+        let currentSigMode = 'draw'; // 'draw' หรือ 'upload'
+
+        window.onload = function() {
+            // ตั้งค่าวันที่เริ่มต้น
+            const todayStr = new Date().toISOString().substring(0, 10);
+            document.getElementById('reportDate').value = todayStr;
+            document.getElementById('surveyDate').value = todayStr;
+            
+            const lastYear = new Date();
+            lastYear.setMonth(lastYear.getMonth() - 6);
+            document.getElementById('calDate').value = lastYear.toISOString().substring(0, 10);
+
+            // สร้างจุดตรวจพื้นฐานขึ้นมา 1 จุด
+            addMeasurementPoint();
+
+            // รันระบบ Canvas วาดลายเซ็น
+            initSignaturePad();
+        };
+
+        // เพิ่มจุดตรวจ
+        function addMeasurementPoint() {
+            pointCount++;
+            const container = document.getElementById('pointsContainer');
+            
+            const card = document.createElement('div');
+            card.id = `point_card_${pointCount}`;
+            // เพิ่มคลาส page-block เพื่อไม่ให้การ์ดขาดครึ่งหน้ากระดาษเวลาสั่งพิมพ์
+            card.className = "bg-white border-2 border-slate-200 rounded-xl p-5 relative transition duration-200 hover:border-blue-400 shadow-sm page-block";
+            
+            let areaOptions = `<option value="">-- โปรดระบุประเภทพื้นที่ตรวจวัด --</option>`;
+            AREA_STANDARDS.forEach(std => {
+                areaOptions += `<option value="${std.id}">[${std.category}] - ${std.name}</option>`;
+            });
+
+            let spotOptions = `<option value="">-- โปรดระบุระดับการใช้สายตา --</option>`;
+            SPOT_STANDARDS.forEach(std => {
+                spotOptions += `<option value="${std.id}">[${std.desc}] - ${std.name}</option>`;
+            });
+
+            card.innerHTML = `
+                <!-- หัวการ์ดจุดตรวจ -->
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-100 pb-3 mb-4 gap-2">
+                    <div class="flex items-center gap-2">
+                        <span class="bg-blue-700 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold font-mono">
+                            ${pointCount}
+                        </span>
+                        <h4 class="font-bold text-slate-800 text-sm">จุดที่ตรวจวัด (Measurement Point)</h4>
+                    </div>
+                    <div class="flex items-center gap-2 w-full sm:w-auto no-print">
+                        <button type="button" onclick="removePointCard(${pointCount})" class="text-red-500 hover:text-red-700 text-xs font-semibold flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            ลบจุดตรวจนี้
+                        </button>
+                    </div>
+                </div>
+
+                <!-- รายละเอียดหลักของการตรวจวัดประจำจุด -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
+                    
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">ลักษณะงาน / ตำแหน่งจุดวัด:</label>
+                            <input type="text" id="loc_name_${pointCount}" class="w-full border border-slate-300 rounded px-2.5 py-1.5 focus:border-blue-500 focus:outline-none" placeholder="เช่น บริเวณพ่นสีโรงงาน / โต๊ะทำงานทั่วไป">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">ประเภทการตรวจวัด:</label>
+                            <select id="measure_type_${pointCount}" onchange="toggleFormFields(${pointCount})" class="w-full border border-slate-300 rounded px-2.5 py-1.5 focus:border-blue-500 focus:outline-none bg-white">
+                                <option value="area">แบบพื้นที่ทั่วไป / กระบวนการผลิต (ตารางที่ 1)</option>
+                                <option value="spot">แบบเฉพาะจุดสายตามอง (ตารางที่ 2, 3)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- ค่ามาตรฐานกฎหมายกำหนด -->
+                    <div class="md:col-span-2 space-y-3">
+                        <div id="area_select_group_${pointCount}" class="block">
+                            <label class="block font-bold text-slate-700 mb-1">เลือกประเภทพื้นที่อ้างอิงกฎหมาย (ตาราง 1):</label>
+                            <select id="area_standard_sel_${pointCount}" onchange="onAreaStandardChange(${pointCount})" class="w-full border border-slate-300 rounded px-2.5 py-1.5 focus:border-blue-500 focus:outline-none bg-white">
+                                ${areaOptions}
+                            </select>
+                            <div class="mt-2 text-slate-500 bg-slate-50 p-2 rounded text-[11px] border border-slate-100 flex justify-between">
+                                <span>ค่าเฉลี่ยกฎหมาย: <strong id="lbl_area_avg_${pointCount}">-</strong> ลักซ์</span>
+                                <span>ต่ำสุดยอมรับได้: <strong id="lbl_area_min_${pointCount}">-</strong> ลักซ์</span>
+                            </div>
+
+                            <!-- ส่วนควบคุมวิธีการกรอกข้อมูลพื้นที่แบบคำนวณ -->
+                            <div class="mt-3">
+                                <label class="block font-bold text-blue-900 mb-1">วิธีการคำนวณพื้นที่:</label>
+                                <select id="area_input_method_${pointCount}" onchange="toggleAreaInputMethod(${pointCount})" class="w-full border border-blue-200 rounded px-2 py-1 focus:border-blue-500 focus:outline-none bg-blue-50 text-[11px]">
+                                    <option value="direct">กรอกผลเฉลี่ยและค่าต่ำสุดโดยตรง (Direct Key-in)</option>
+                                    <option value="layout">คำนวณจากแผนผังการติดตั้งหลอดไฟ (Calculate from Layout)</option>
+                                </select>
+                            </div>
+
+                            <!-- แผนผังย่อยสำหรับเลือก -->
+                            <div id="layout_selection_div_${pointCount}" class="hidden mt-3 p-3 bg-slate-50 border border-slate-200 rounded">
+                                <label class="block font-bold text-slate-700 mb-1 text-[11px]">เลือกแผนผังการติดตั้ง (ตามคู่มือ):</label>
+                                <select id="luminaire_layout_type_${pointCount}" onchange="renderLayoutInputs(${pointCount})" class="w-full border border-slate-300 rounded px-2 py-1 text-[11px] bg-white">
+                                    <option value="2_1">แบบ 2.1: สมมาตรมากกว่าหรือเท่ากับ 2 แถว (สูตร R, Q, T, P)</option>
+                                    <option value="2_2">แบบ 2.2: ไฟดวงเดียวติดตั้งกลางห้อง (สูตร 4 จุด)</option>
+                                    <option value="2_3">แบบ 2.3: หลอดติดตั้งแถวเดียวกลางห้อง (สูตร Q, P)</option>
+                                    <option value="2_4">แบบ 2.4: ติดตั้งต่อเนื่องตั้งแต่ 2 แถวขึ้นไป (สูตร R, Q, T, P)</option>
+                                    <option value="2_5">แบบ 2.5: ติดตั้งต่อเนื่องแถวเดียวกลางห้อง (สูตร Q, P)</option>
+                                    <option value="2_6">แบบ 2.6: แบบเต็มเพดาน (Luminous / Louver)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- ตารางตรวจวัดแบบเฉพาะจุด -->
+                        <div id="spot_select_group_${pointCount}" class="hidden">
+                            <label class="block font-bold text-slate-700 mb-1">เลือกลักษณะงานสายตา (ตาราง 2):</label>
+                            <select id="spot_standard_sel_${pointCount}" onchange="onSpotStandardChange(${pointCount})" class="w-full border border-slate-300 rounded px-2.5 py-1.5 focus:border-blue-500 focus:outline-none bg-white">
+                                ${spotOptions}
+                            </select>
+                            <div class="mt-2 text-slate-500 bg-slate-50 p-2 rounded text-[11px] border border-slate-100 grid grid-cols-3 gap-1">
+                                <span>จุดงาน (พื้นที่ 1): <strong id="lbl_spot_p1_${pointCount}">-</strong> ลักซ์</span>
+                                <span>เอื้อมถึง (พื้นที่ 2): <strong id="lbl_spot_p2_${pointCount}">-</strong> ลักซ์</span>
+                                <span>โดยรอบ (พื้นที่ 3): <strong id="lbl_spot_p3_${pointCount}">-</strong> ลักซ์</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- อินพุตคีย์ค่าที่วัดจริง -->
+                    <div class="space-y-3 bg-blue-50 p-3 rounded-lg border border-blue-100">
+                        <p class="font-bold text-blue-950 text-[11px] uppercase mb-1">ค่าความเข้มแสงที่วัดได้จริง</p>
+                        
+                        <div id="area_inputs_${pointCount}" class="space-y-2">
+                            <div>
+                                <label class="block font-medium text-slate-700">ค่าเฉลี่ยที่ได้ (ลักซ์):</label>
+                                <input type="number" id="act_area_avg_${pointCount}" oninput="evaluateResult(${pointCount})" class="w-full border border-slate-300 rounded p-1 text-center font-bold" placeholder="เฉลี่ย">
+                            </div>
+                            <div>
+                                <label class="block font-medium text-slate-700">ค่าจุดต่ำสุดที่ได้ (ลักซ์):</label>
+                                <input type="number" id="act_area_min_${pointCount}" oninput="evaluateResult(${pointCount})" class="w-full border border-slate-300 rounded p-1 text-center font-bold" placeholder="ต่ำสุด">
+                            </div>
+                        </div>
+
+                        <div id="spot_inputs_${pointCount}" class="hidden space-y-2">
+                            <div>
+                                <label class="block font-medium text-slate-700">พื้นที่ 1 (จุดงาน):</label>
+                                <input type="number" id="act_spot_p1_${pointCount}" oninput="evaluateResult(${pointCount})" class="w-full border border-slate-300 rounded p-1 text-center font-bold" placeholder="พื้นที่ 1">
+                            </div>
+                            <div>
+                                <label class="block font-medium text-slate-700">พื้นที่ 2 (เอื้อมถึง):</label>
+                                <input type="number" id="act_spot_p2_${pointCount}" oninput="evaluateResult(${pointCount})" class="w-full border border-slate-300 rounded p-1 text-center font-bold" placeholder="พื้นที่ 2">
+                            </div>
+                            <div>
+                                <label class="block font-medium text-slate-700">พื้นที่ 3 (โดยรอบ):</label>
+                                <input type="number" id="act_spot_p3_${pointCount}" oninput="evaluateResult(${pointCount})" class="w-full border border-slate-300 rounded p-1 text-center font-bold" placeholder="พื้นที่ 3">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ส่วนกรอกค่าแผนผังย่อย -->
+                <div id="layout_raw_inputs_section_${pointCount}" class="hidden mt-4 p-4 border border-blue-200 rounded-lg bg-blue-50/40">
+                    <h5 class="text-xs font-bold text-blue-950 mb-2 border-b border-blue-200 pb-1">ป้อนข้อมูลวัดดิบตามผังเพื่อหาค่าเฉลี่ยอัตโนมัติ</h5>
+                    <div id="layout_inputs_grid_${pointCount}" class="grid grid-cols-1 gap-3">
+                        <!-- กริดป้อนหลอดไฟและสมการคำนวณ -->
+                    </div>
+                </div>
+
+                <!-- การประเมินผล ข้อเสนอแนะ และภาพถ่ายประจำจุด -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 pt-4 border-t border-slate-100 text-xs">
+                    
+                    <div class="space-y-1.5">
+                        <label class="block font-bold text-slate-700">แนบรูปภาพจุดตรวจวัด:</label>
+                        <div class="flex items-center gap-2">
+                            <label class="file-input-label cursor-pointer bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 px-3 py-1.5 rounded flex items-center gap-1 transition duration-150">
+                                <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                                เลือกรูปถ่าย
+                                <input type="file" id="point_img_${pointCount}" class="hidden" accept="image/*" onchange="previewPointImage(this, ${pointCount})">
+                            </label>
+                            <span id="img_name_${pointCount}" class="text-slate-400 italic">ไม่ได้เลือกรูป</span>
+                        </div>
+                        <div class="mt-2 text-center">
+                            <img id="img_preview_${pointCount}" class="hidden max-h-24 mx-auto rounded border border-slate-200" />
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="block font-bold text-slate-700">ข้อแก้ไขแนะนำเฉพาะจุดนี้:</label>
+                            <span id="retest_status_${pointCount}" class="hidden px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-300 animate-pulse">
+                                ตรวจวัดซ้ำหลังปรับปรุง (Retested)
+                            </span>
+                        </div>
+                        <textarea id="point_rec_${pointCount}" class="w-full border border-slate-300 rounded p-2 focus:border-blue-500 focus:outline-none h-14" placeholder="ระบุวิธีปรับปรุงแก้ไข เช่น ทำความสะอาดฝาครอบโคมไฟ / ตรวจเช็คเปลี่ยนบัลลาสต์และสตาร์ทเตอร์เพื่อป้องกันการกะพริบ"></textarea>
+                        
+                        <div class="mt-2 flex items-center justify-between p-2 rounded-lg" id="eval_banner_${pointCount}" style="background-color: #f1f5f9;">
+                            <span class="font-bold">ผลประเมินตามเกณฑ์กฎหมาย:</span>
+                            <span id="eval_result_text_${pointCount}" class="font-bold px-3 py-0.5 rounded text-xs bg-slate-400 text-white">
+                                รอประมวลผล
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            `;
+            
+            container.appendChild(card);
+            updateOverviewStats();
+        }
+
+        // การควบคุมปุ่มสลับการทำงาน
+        function toggleFormFields(id) {
+            const type = document.getElementById(`measure_type_${id}`).value;
+            const areaSelectGroup = document.getElementById(`area_select_group_${id}`);
+            const spotSelectGroup = document.getElementById(`spot_select_group_${id}`);
+            const areaInputs = document.getElementById(`area_inputs_${id}`);
+            const spotInputs = document.getElementById(`spot_inputs_${id}`);
+            const layoutRawSection = document.getElementById(`layout_raw_inputs_section_${id}`);
+
+            if (type === "area") {
+                areaSelectGroup.style.display = "block";
+                spotSelectGroup.style.display = "none";
+                areaInputs.style.display = "block";
+                spotInputs.style.display = "none";
+                toggleAreaInputMethod(id);
+            } else {
+                areaSelectGroup.style.display = "none";
+                spotSelectGroup.style.display = "block";
+                areaInputs.style.display = "none";
+                spotInputs.style.display = "block";
+                layoutRawSection.style.display = "none";
+            }
+            evaluateResult(id);
+        }
+
+        function toggleAreaInputMethod(id) {
+            const method = document.getElementById(`area_input_method_${id}`).value;
+            const layoutSelectionDiv = document.getElementById(`layout_selection_div_${id}`);
+            const layoutRawSection = document.getElementById(`layout_raw_inputs_section_${id}`);
+            const areaInputs = document.getElementById(`area_inputs_${id}`);
+
+            if (method === "layout") {
+                layoutSelectionDiv.style.display = "block";
+                layoutRawSection.style.display = "block";
+                document.getElementById(`act_area_avg_${id}`).readOnly = true;
+                document.getElementById(`act_area_min_${id}`).readOnly = true;
+                document.getElementById(`act_area_avg_${id}`).classList.add("bg-slate-100");
+                document.getElementById(`act_area_min_${id}`).classList.add("bg-slate-100");
+                renderLayoutInputs(id);
+            } else {
+                layoutSelectionDiv.style.display = "none";
+                layoutRawSection.style.display = "none";
+                document.getElementById(`act_area_avg_${id}`).readOnly = false;
+                document.getElementById(`act_area_min_${id}`).readOnly = false;
+                document.getElementById(`act_area_avg_${id}`).classList.remove("bg-slate-100");
+                document.getElementById(`act_area_min_${id}`).classList.remove("bg-slate-100");
+            }
+            evaluateResult(id);
+        }
+
+        // สมการคำนวณตามสูตรทางคณิตศาสตร์ในภาพแนบ (แบบ 2.1 - 2.6)
+        function renderLayoutInputs(id) {
+            const layoutType = document.getElementById(`luminaire_layout_type_${id}`).value;
+            const gridDiv = document.getElementById(`layout_inputs_grid_${id}`);
+            let html = "";
+
+            if (layoutType === "2_1") {
+                html = `
+                    <p class="text-[10px] text-slate-600 mb-1.5"><strong>สมการคำนวณ:</strong> ค่าแสงเฉลี่ย = [ R(N-1)(M-1) + Q(N-1) + T(M-1) + P ] / (N × M)</p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-2">
+                        <div>
+                            <label class="block font-bold">N (จำนวนหลอดต่อแถว):</label>
+                            <input type="number" id="lay_N_${id}" oninput="runLayoutCalculation(${id})" class="w-full border border-slate-300 rounded px-1.5 py-1 text-center" value="4">
+                        </div>
+                        <div>
+                            <label class="block font-bold">M (จำนวนแถว):</label>
+                            <input type="number" id="lay_M_${id}" oninput="runLayoutCalculation(${id})" class="w-full border border-slate-300 rounded px-1.5 py-1 text-center" value="3">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[10px]">
+                        <div class="border border-slate-200 p-2 rounded bg-white">
+                            <span class="block font-bold text-slate-700 mb-1">R (จุด r1-r8 ใจกลางแถว):</span>
+                            <div class="grid grid-cols-4 gap-1">
+                                ${Array.from({length: 8}, (_, i) => `<input type="number" id="lay_r_${i+1}_${id}" oninput="runLayoutCalculation(${id})" class="border border-slate-200 rounded text-center py-0.5" placeholder="r${i+1}">`).join('')}
+                            </div>
+                        </div>
+                        <div class="border border-slate-200 p-2 rounded bg-white">
+                            <span class="block font-bold text-slate-700 mb-1">Q (จุด q1-q4 ขอบห้องขนานแถว):</span>
+                            <div class="grid grid-cols-4 gap-1">
+                                ${Array.from({length: 4}, (_, i) => `<input type="number" id="lay_q_${i+1}_${id}" oninput="runLayoutCalculation(${id})" class="border border-slate-200 rounded text-center py-0.5" placeholder="q${i+1}">`).join('')}
+                            </div>
+                        </div>
+                        <div class="border border-slate-200 p-2 rounded bg-white">
+                            <span class="block font-bold text-slate-700 mb-1">T (จุด t1-t4 ขอบห้องหัวท้าย):</span>
+                            <div class="grid grid-cols-4 gap-1">
+                                ${Array.from({length: 4}, (_, i) => `<input type="number" id="lay_t_${i+1}_${id}" oninput="runLayoutCalculation(${id})" class="border border-slate-200 rounded text-center py-0.5" placeholder="t${i+1}">`).join('')}
+                            </div>
+                        </div>
+                        <div class="border border-slate-200 p-2 rounded bg-white">
+                            <span class="block font-bold text-slate-700 mb-1">P (จุด p1-p2 มุมห้อง):</span>
+                            <div class="grid grid-cols-2 gap-1">
+                                ${Array.from({length: 2}, (_, i) => `<input type="number" id="lay_p_${i+1}_${id}" oninput="runLayoutCalculation(${id})" class="border border-slate-200 rounded text-center py-0.5" placeholder="p${i+1}">`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (layoutType === "2_2") {
+                html = `
+                    <p class="text-[10px] text-slate-600 mb-1.5"><strong>สมการคำนวณ:</strong> ค่าแสงเฉลี่ย = [ p1 + p2 + p3 + p4 ] / 4</p>
+                    <div class="border border-slate-200 p-2 rounded bg-white max-w-sm text-[10px]">
+                        <span class="block font-bold text-slate-700 mb-1">วัดที่ 4 มุมห้อง (p1-p4):</span>
+                        <div class="grid grid-cols-4 gap-1">
+                            ${Array.from({length: 4}, (_, i) => `<input type="number" id="lay_p_${i+1}_${id}" oninput="runLayoutCalculation(${id})" class="border border-slate-200 rounded text-center py-0.5" placeholder="p${i+1}">`).join('')}
+                        </div>
+                    </div>
+                `;
+            } else if (layoutType === "2_3") {
+                html = `
+                    <p class="text-[10px] text-slate-600 mb-1.5"><strong>สมการคำนวณ:</strong> ค่าแสงเฉลี่ย = [ Q(N-1) + P ] / N</p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-2">
+                        <div>
+                            <label class="block font-bold">N (จำนวนหลอด):</label>
+                            <input type="number" id="lay_N_${id}" oninput="runLayoutCalculation(${id})" class="w-full border border-slate-300 rounded px-1.5 py-1 text-center" value="4">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[10px]">
+                        <div class="border border-slate-200 p-2 rounded bg-white">
+                            <span class="block font-bold text-slate-700 mb-1">Q (จุด q1-q8 สองฝั่งหลอด):</span>
+                            <div class="grid grid-cols-4 gap-1">
+                                ${Array.from({length: 8}, (_, i) => `<input type="number" id="lay_q_${i+1}_${id}" oninput="runLayoutCalculation(${id})" class="border border-slate-200 rounded text-center py-0.5" placeholder="q${i+1}">`).join('')}
+                            </div>
+                        </div>
+                        <div class="border border-slate-200 p-2 rounded bg-white">
+                            <span class="block font-bold text-slate-700 mb-1">P (จุด p1-p2 มุมห้อง):</span>
+                            <div class="grid grid-cols-2 gap-1">
+                                ${Array.from({length: 2}, (_, i) => `<input type="number" id="lay_p_${i+1}_${id}" oninput="runLayoutCalculation(${id})" class="border border-slate-200 rounded text-center py-0.5" placeholder="p${i+1}">`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (layoutType === "2_4") {
+                html = `
+                    <p class="text-[10px] text-slate-600 mb-1.5"><strong>สมการคำนวณ:</strong> ค่าแสงเฉลี่ย = [ R × N(M-1) + Q × N + T(M-1) + P ] / [ M(N + 1) ]</p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-2">
+                        <div>
+                            <label class="block font-bold">N (จำนวนหลอดต่อแถว):</label>
+                            <input type="number" id="lay_N_${id}" oninput="runLayoutCalculation(${id})" class="w-full border border-slate-300 rounded px-1.5 py-1 text-center" value="4">
+                        </div>
+                        <div>
+                            <label class="block font-bold">M (จำนวนแถว):</label>
+                            <input type="number" id="lay_M_${id}" oninput="runLayoutCalculation(${id})" class="w-full border border-slate-300 rounded px-1.5 py-1 text-center" value="3">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[10px]">
+                        <div class="border border-slate-200 p-2 rounded bg-white">
+                            <span class="block font-bold text-slate-700 mb-1">R (จุด r1-r4 ระหว่างหลอด):</span>
+                            <div class="grid grid-cols-4 gap-1">
+                                ${Array.from({length: 4}, (_, i) => `<input type="number" id="lay_r_${i+1}_${id}" oninput="runLayoutCalculation(${id})" class="border border-slate-200 rounded text-center py-0.5" placeholder="r${i+1}">`).join('')}
+                            </div>
+                        </div>
+                        <div class="border border-slate-200 p-2 rounded bg-white">
+                            <span class="block font-bold text-slate-700 mb-1">Q (จุด q1-q2 ปลายแถวห้อง):</span>
+                            <div class="grid grid-cols-2 gap-1">
+                                ${Array.from({length: 2}, (_, i) => `<input type="number" id="lay_q_${i+1}_${id}" oninput="runLayoutCalculation(${id})" class="border border-slate-200 rounded text-center py-0.5" placeholder="q${i+1}">`).join('')}
+                            </div>
+                        </div>
+                        <div class="border border-slate-200 p-2 rounded bg-white">
+                            <span class="block font-bold text-slate-700 mb-1">T (จุด t1-t4 ข้างห้อง):</span>
+                            <div class="grid grid-cols-4 gap-1">
+                                ${Array.from({length: 4}, (_, i) => `<input type="number" id="lay_t_${i+1}_${id}" oninput="runLayoutCalculation(${id})" class="border border-slate-200 rounded text-center py-0.5" placeholder="t${i+1}">`).join('')}
+                            </div>
+                        </div>
+                        <div class="border border-slate-200 p-2 rounded bg-white">
+                            <span class="block font-bold text-slate-700 mb-1">P (จุด p1-p2 มุม):</span>
+                            <div class="grid grid-cols-2 gap-1">
+                                ${Array.from({length: 2}, (_, i) => `<input type="number" id="lay_p_${i+1}_${id}" oninput="runLayoutCalculation(${id})" class="border border-slate-200 rounded text-center py-0.5" placeholder="p${i+1}">`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (layoutType === "2_5") {
+                html = `
+                    <p class="text-[10px] text-slate-600 mb-1.5"><strong>สมการคำนวณ:</strong> ค่าแสงเฉลี่ย = [ Q × N + P ] / (N + 1)</p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-2">
+                        <div>
+                            <label class="block font-bold">N (จำนวนหลอด):</label>
+                            <input type="number" id="lay_N_${id}" oninput="runLayoutCalculation(${id})" class="w-full border border-slate-300 rounded px-1.5 py-1 text-center" value="5">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[10px]">
+                        <div class="border border-slate-200 p-2 rounded bg-white">
+                            <span class="block font-bold text-slate-700 mb-1">Q (จุด q1-q6 ด้านข้างแนว):</span>
+                            <div class="grid grid-cols-3 gap-1">
+                                ${Array.from({length: 6}, (_, i) => `<input type="number" id="lay_q_${i+1}_${id}" oninput="runLayoutCalculation(${id})" class="border border-slate-200 rounded text-center py-0.5" placeholder="q${i+1}">`).join('')}
+                            </div>
+                        </div>
+                        <div class="border border-slate-200 p-2 rounded bg-white">
+                            <span class="block font-bold text-slate-700 mb-1">P (จุด p1-p2 มุมห้อง):</span>
+                            <div class="grid grid-cols-2 gap-1">
+                                ${Array.from({length: 2}, (_, i) => `<input type="number" id="lay_p_${i+1}_${id}" oninput="runLayoutCalculation(${id})" class="border border-slate-200 rounded text-center py-0.5" placeholder="p${i+1}">`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (layoutType === "2_6") {
+                html = `
+                    <p class="text-[10px] text-slate-600 mb-1.5"><strong>สมการคำนวณ:</strong> ค่าแสงเฉลี่ย = [ R(L-8)(W-8) + 8Q(L-8) + 8T(W-8) + 64P ] / (W × L)</p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-2">
+                        <div>
+                            <label class="block font-bold">W (ความกว้างห้อง):</label>
+                            <input type="number" id="lay_W_${id}" oninput="runLayoutCalculation(${id})" class="w-full border border-slate-300 rounded px-1.5 py-1 text-center" value="30">
+                        </div>
+                        <div>
+                            <label class="block font-bold">L (ความยาวห้อง):</label>
+                            <input type="number" id="lay_L_${id}" oninput="runLayoutCalculation(${id})" class="w-full border border-slate-300 rounded px-1.5 py-1 text-center" value="40">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[10px]">
+                        <div class="border border-slate-200 p-2 rounded bg-white">
+                            <span class="block font-bold text-slate-700 mb-1">R (จุด r1-r4 ในพื้นที่):</span>
+                            <div class="grid grid-cols-4 gap-1">
+                                ${Array.from({length: 4}, (_, i) => `<input type="number" id="lay_r_${i+1}_${id}" oninput="runLayoutCalculation(${id})" class="border border-slate-200 rounded text-center py-0.5" placeholder="r${i+1}">`).join('')}
+                            </div>
+                        </div>
+                        <div class="border border-slate-200 p-2 rounded bg-white">
+                            <span class="block font-bold text-slate-700 mb-1">Q (จุด q1-q2):</span>
+                            <div class="grid grid-cols-2 gap-1">
+                                ${Array.from({length: 2}, (_, i) => `<input type="number" id="lay_q_${i+1}_${id}" oninput="runLayoutCalculation(${id})" class="border border-slate-200 rounded text-center py-0.5" placeholder="q${i+1}">`).join('')}
+                            </div>
+                        </div>
+                        <div class="border border-slate-200 p-2 rounded bg-white">
+                            <span class="block font-bold text-slate-700 mb-1">T (จุด t1-t2):</span>
+                            <div class="grid grid-cols-2 gap-1">
+                                ${Array.from({length: 2}, (_, i) => `<input type="number" id="lay_t_${i+1}_${id}" oninput="runLayoutCalculation(${id})" class="border border-slate-200 rounded text-center py-0.5" placeholder="t${i+1}">`).join('')}
+                            </div>
+                        </div>
+                        <div class="border border-slate-200 p-2 rounded bg-white">
+                            <span class="block font-bold text-slate-700 mb-1">P (จุด p1-p2):</span>
+                            <div class="grid grid-cols-2 gap-1">
+                                ${Array.from({length: 2}, (_, i) => `<input type="number" id="lay_p_${i+1}_${id}" oninput="runLayoutCalculation(${id})" class="border border-slate-200 rounded text-center py-0.5" placeholder="p${i+1}">`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            gridDiv.innerHTML = html;
+        }
+
+        // ประมวลสูตรสมการเชิงลึกแบบ Real-time
+        function runLayoutCalculation(id) {
+            const layoutType = document.getElementById(`luminaire_layout_type_${id}`).value;
+            let calculatedAvg = 0;
+            let calculatedMin = 0;
+            let allPoints = [];
+
+            if (layoutType === "2_1") {
+                const N = parseFloat(document.getElementById(`lay_N_${id}`).value) || 1;
+                const M = parseFloat(document.getElementById(`lay_M_${id}`).value) || 1;
+
+                const rData = getAverageOfInputs(id, "r", 8);
+                const qData = getAverageOfInputs(id, "q", 4);
+                const tData = getAverageOfInputs(id, "t", 4);
+                const pData = getAverageOfInputs(id, "p", 2);
+
+                allPoints = [...rData.allValues, ...qData.allValues, ...tData.allValues, ...pData.allValues];
+
+                const R = rData.avg;
+                const Q = qData.avg;
+                const T = tData.avg;
+                const P = pData.avg;
+
+                const numerator = (R * (N - 1) * (M - 1)) + (Q * (N - 1)) + (T * (M - 1)) + P;
+                const denominator = N * M;
+                calculatedAvg = denominator > 0 ? (numerator / denominator) : 0;
+
+            } else if (layoutType === "2_2") {
+                const pData = getAverageOfInputs(id, "p", 4);
+                allPoints = [...pData.allValues];
+                calculatedAvg = pData.avg;
+
+            } else if (layoutType === "2_3") {
+                const N = parseFloat(document.getElementById(`lay_N_${id}`).value) || 1;
+                const qData = getAverageOfInputs(id, "q", 8);
+                const pData = getAverageOfInputs(id, "p", 2);
+
+                allPoints = [...qData.allValues, ...pData.allValues];
+
+                const Q = qData.avg;
+                const P = pData.avg;
+
+                calculatedAvg = N > 0 ? (((Q * (N - 1)) + P) / N) : 0;
+
+            } else if (layoutType === "2_4") {
+                const N = parseFloat(document.getElementById(`lay_N_${id}`).value) || 1;
+                const M = parseFloat(document.getElementById(`lay_M_${id}`).value) || 1;
+
+                const rData = getAverageOfInputs(id, "r", 4);
+                const qData = getAverageOfInputs(id, "q", 2);
+                const tData = getAverageOfInputs(id, "t", 4);
+                const pData = getAverageOfInputs(id, "p", 2);
+
+                allPoints = [...rData.allValues, ...qData.allValues, ...tData.allValues, ...pData.allValues];
+
+                const R = rData.avg;
+                const Q = qData.avg;
+                const T = tData.avg;
+                const P = pData.avg;
+
+                const numerator = (R * N * (M - 1)) + (Q * N) + (T * (M - 1)) + P;
+                const denominator = M * (N + 1);
+                calculatedAvg = denominator > 0 ? (numerator / denominator) : 0;
+
+            } else if (layoutType === "2_5") {
+                const N = parseFloat(document.getElementById(`lay_N_${id}`).value) || 1;
+                const qData = getAverageOfInputs(id, "q", 6);
+                const pData = getAverageOfInputs(id, "p", 2);
+
+                allPoints = [...qData.allValues, ...pData.allValues];
+
+                const Q = qData.avg;
+                const P = pData.avg;
+
+                calculatedAvg = (N + 1) > 0 ? (((Q * N) + P) / (N + 1)) : 0;
+
+            } else if (layoutType === "2_6") {
+                const W = parseFloat(document.getElementById(`lay_W_${id}`).value) || 1;
+                const L = parseFloat(document.getElementById(`lay_L_${id}`).value) || 1;
+
+                const rData = getAverageOfInputs(id, "r", 4);
+                const qData = getAverageOfInputs(id, "q", 2);
+                const tData = getAverageOfInputs(id, "t", 2);
+                const pData = getAverageOfInputs(id, "p", 2);
+
+                allPoints = [...rData.allValues, ...qData.allValues, ...tData.allValues, ...pData.allValues];
+
+                const R = rData.avg;
+                const Q = qData.avg;
+                const T = tData.avg;
+                const P = pData.avg;
+
+                const numerator = (R * (L - 8) * (W - 8)) + (8 * Q * (L - 8)) + (8 * T * (W - 8)) + (64 * P);
+                const denominator = W * L;
+                calculatedAvg = denominator > 0 ? (numerator / denominator) : 0;
+            }
+
+            if (allPoints.length > 0) {
+                calculatedMin = Math.min(...allPoints);
+                
+                document.getElementById(`act_area_avg_${id}`).value = Math.round(calculatedAvg);
+                document.getElementById(`act_area_min_${id}`).value = Math.round(calculatedMin);
+            } else {
+                document.getElementById(`act_area_avg_${id}`).value = "";
+                document.getElementById(`act_area_min_${id}`).value = "";
+            }
+
+            evaluateResult(id);
+        }
+
+        function onAreaStandardChange(id) {
+            const selectVal = document.getElementById(`area_standard_sel_${id}`).value;
+            const standard = AREA_STANDARDS.find(s => s.id === selectVal);
+            
+            const avgLbl = document.getElementById(`lbl_area_avg_${id}`);
+            const minLbl = document.getElementById(`lbl_area_min_${id}`);
+            
+            if (standard) {
+                avgLbl.innerText = standard.avg;
+                minLbl.innerText = standard.min ? standard.min : "ไม่กำหนด";
+            } else {
+                avgLbl.innerText = "-";
+                minLbl.innerText = "-";
+            }
+            evaluateResult(id);
+        }
+
+        function onSpotStandardChange(id) {
+            const selectVal = document.getElementById(`spot_standard_sel_${id}`).value;
+            const standard = SPOT_STANDARDS.find(s => s.id === selectVal);
+            
+            const p1Lbl = document.getElementById(`lbl_spot_p1_${id}`);
+            const p2Lbl = document.getElementById(`lbl_spot_p2_${id}`);
+            const p3Lbl = document.getElementById(`lbl_spot_p3_${id}`);
+            
+            if (standard) {
+                p1Lbl.innerText = standard.minRequired;
+                const surroundLimits = getSurroundingMinLimits(standard.minRequired);
+                p2Lbl.innerText = surroundLimits[1];
+                p3Lbl.innerText = surroundLimits[2];
+            } else {
+                p1Lbl.innerText = "-";
+                p2Lbl.innerText = "-";
+                p3Lbl.innerText = "-";
+            }
+            evaluateResult(id);
+        }
+
+        function evaluateResult(id) {
+            const type = document.getElementById(`measure_type_${id}`).value;
+            const banner = document.getElementById(`eval_banner_${id}`);
+            const resText = document.getElementById(`eval_result_text_${id}`);
+            const recArea = document.getElementById(`point_rec_${id}`);
+            const retestBadge = document.getElementById(`retest_status_${id}`);
+            
+            let isPassed = null;
+            let isPartiallyFilled = false;
+
+            if (type === "area") {
+                const stdId = document.getElementById(`area_standard_sel_${id}`).value;
+                const standard = AREA_STANDARDS.find(s => s.id === stdId);
+                const actAvg = parseFloat(document.getElementById(`act_area_avg_${id}`).value);
+                const actMin = parseFloat(document.getElementById(`act_area_min_${id}`).value);
+
+                if (standard && !isNaN(actAvg)) {
+                    isPartiallyFilled = true;
+                    let checkAvg = actAvg >= standard.avg;
+                    let checkMin = true;
+                    if (standard.min !== null) {
+                        if (!isNaN(actMin)) {
+                            checkMin = actMin >= standard.min;
+                        } else {
+                            isPassed = null;
+                            isPartiallyFilled = false;
+                        }
+                    }
+
+                    if (isPartiallyFilled) {
+                        isPassed = (checkAvg && checkMin);
+                    }
+                }
+            } else {
+                const stdId = document.getElementById(`spot_standard_sel_${id}`).value;
+                const standard = SPOT_STANDARDS.find(s => s.id === stdId);
+                const actP1 = parseFloat(document.getElementById(`act_spot_p1_${id}`).value);
+                const actP2 = parseFloat(document.getElementById(`act_spot_p2_${id}`).value);
+                const actP3 = parseFloat(document.getElementById(`act_spot_p3_${id}`).value);
+
+                if (standard && !isNaN(actP1) && !isNaN(actP2) && !isNaN(actP3)) {
+                    const surroundLimits = getSurroundingMinLimits(standard.minRequired);
+                    
+                    const checkP1 = actP1 >= surroundLimits[0];
+                    const checkP2 = actP2 >= surroundLimits[1];
+                    const checkP3 = actP3 >= surroundLimits[2];
+
+                    isPassed = (checkP1 && checkP2 && checkP3);
+                    isPartiallyFilled = true;
+                }
+            }
+
+            if (isPassed === true) {
+                banner.className = "mt-2 flex items-center justify-between p-2 rounded-lg bg-green-50 border border-green-200";
+                resText.className = "font-bold px-3 py-1 rounded text-xs bg-green-600 text-white";
+                resText.innerText = "ผ่านเกณฑ์ตามกฎหมาย";
+                retestBadge.classList.add('hidden');
+            } else if (isPassed === false) {
+                banner.className = "mt-2 flex items-center justify-between p-2 rounded-lg bg-red-50 border border-red-200";
+                resText.className = "font-bold px-3 py-1 rounded text-xs bg-red-600 text-white";
+                resText.innerText = "ต่ำกว่าเกณฑ์ (ไม่ผ่านมาตรฐาน)";
+                
+                if (recArea.value.trim() === "") {
+                    recArea.value = "[ข้อปรับปรุงความปลอดภัย] ระดับแสงสว่างไม่ตรงตามมาตรฐานกฎหมาย แนะนำให้ทำความสะอาดโคม หรือทำการจัดวางตำแหน่งหลอดไฟเพิ่มเติมเฉพาะบริเวณเพื่อความปลอดภัย";
+                }
+                
+                retestBadge.classList.remove('hidden');
+            } else {
+                banner.className = "mt-2 flex items-center justify-between p-2 rounded-lg bg-gray-50 border border-gray-200";
+                resText.className = "font-bold px-3 py-1 rounded text-xs bg-slate-400 text-white";
+                resText.innerText = "โปรดกรอกข้อมูลให้ครบเพื่อประเมิน";
+                retestBadge.classList.add('hidden');
+            }
+
+            updateOverviewStats();
+        }
+
+        function updateOverviewStats() {
+            let total = 0;
+            let passed = 0;
+            let failed = 0;
+
+            const cards = document.querySelectorAll('[id^="point_card_"]');
+            total = cards.length;
+
+            cards.forEach(card => {
+                const id = card.id.replace('point_card_', '');
+                const resText = document.getElementById(`eval_result_text_${id}`);
+                if (resText) {
+                    if (resText.innerText === "ผ่านเกณฑ์ตามกฎหมาย") {
+                        passed++;
+                    } else if (resText.innerText === "ต่ำกว่าเกณฑ์ (ไม่ผ่านมาตรฐาน)") {
+                        failed++;
+                    }
+                }
+            });
+
+            document.getElementById('totalPoints').innerText = total;
+            document.getElementById('passedPoints').innerText = passed;
+            document.getElementById('failedPoints').innerText = failed;
+
+            const overallBadge = document.getElementById('overallStatus');
+            if (total === 0) {
+                overallBadge.className = "mt-1 px-3 py-1 rounded text-xs font-bold bg-slate-100 text-slate-600";
+                overallBadge.innerText = "ยังไม่มีข้อมูล";
+            } else if (failed > 0) {
+                overallBadge.className = "mt-1 px-3 py-1 rounded text-xs font-bold bg-red-100 text-red-700 border border-red-300";
+                overallBadge.innerText = "ต้องปรับปรุงแก้ไข";
+            } else if (passed === total) {
+                overallBadge.className = "mt-1 px-3 py-1 rounded text-xs font-bold bg-green-100 text-green-700 border border-green-300";
+                overallBadge.innerText = "สมบูรณ์ / ผ่านเกณฑ์ 100%";
+            } else {
+                overallBadge.className = "mt-1 px-3 py-1 rounded text-xs font-bold bg-amber-100 text-amber-700 border border-amber-300";
+                overallBadge.innerText = "กรอกข้อมูลยังไม่ครบ";
+            }
+        }
+
+        function previewPointImage(input, id) {
+            const file = input.files[0];
+            const nameSpan = document.getElementById(`img_name_${id}`);
+            const imgPreview = document.getElementById(`img_preview_${id}`);
+
+            if (file) {
+                nameSpan.innerText = file.name;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imgPreview.src = e.target.result;
+                    imgPreview.classList.remove('hidden');
+                }
+                reader.readAsDataURL(file);
+            } else {
+                nameSpan.innerText = "ไม่ได้เลือกรูปภาพ";
+                imgPreview.classList.add('hidden');
+            }
+        }
+
+        function previewLogo(input) {
+            const file = input.files[0];
+            const logoPreview = document.getElementById('logoPreview');
+            const logoPrint = document.getElementById('logoPrint');
+            const logoPrintText = document.getElementById('logoPrintText');
+            const logoPlaceholder = document.getElementById('logoPlaceholder');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    logoPreview.src = e.target.result;
+                    logoPreview.classList.remove('hidden');
+                    
+                    logoPrint.src = e.target.result;
+                    logoPrint.style.display = "block";
+                    
+                    if (logoPrintText) logoPrintText.style.display = "none";
+                    logoPlaceholder.classList.add('hidden');
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // ระบบลงลายมือชื่อขั้นสูง (รองรับทั้งการวาด และอัปโหลดไฟล์รูป)
+        function initSignaturePad() {
+            sigCanvas = document.getElementById('sigCanvas');
+            ctx = sigCanvas.getContext('2d');
+            let lastX = 0;
+            let lastY = 0;
+
+            function getMousePos(canvasDom, touchOrMouseEvent) {
+                const rect = canvasDom.getBoundingClientRect();
+                const clientX = touchOrMouseEvent.touches ? touchOrMouseEvent.touches[0].clientX : touchOrMouseEvent.clientX;
+                const clientY = touchOrMouseEvent.touches ? touchOrMouseEvent.touches[0].clientY : touchOrMouseEvent.clientY;
+                return {
+                    x: clientX - rect.left,
+                    y: clientY - rect.top
+                };
+            }
+
+            function startDrawing(e) {
+                drawing = true;
+                const pos = getMousePos(sigCanvas, e);
+                lastX = pos.x;
+                lastY = pos.y;
+                e.preventDefault();
+            }
+
+            function draw(e) {
+                if (!drawing) return;
+                const pos = getMousePos(sigCanvas, e);
+                ctx.beginPath();
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(pos.x, pos.y);
+                ctx.strokeStyle = '#0f172a'; // ใช้สีดำเป็นระเบียบ
+                ctx.lineWidth = 2.5;
+                ctx.lineCap = 'round';
+                ctx.stroke();
+                lastX = pos.x;
+                lastY = pos.y;
+                e.preventDefault();
+                updateSignaturePreview();
+            }
+
+            function stopDrawing() {
+                drawing = false;
+            }
+
+            sigCanvas.addEventListener('mousedown', startDrawing);
+            sigCanvas.addEventListener('mousemove', draw);
+            window.addEventListener('mouseup', stopDrawing);
+
+            sigCanvas.addEventListener('touchstart', startDrawing, { passive: false });
+            sigCanvas.addEventListener('touchmove', draw, { passive: false });
+            sigCanvas.addEventListener('touchend', stopDrawing);
+        }
+
+        // ฟังก์ชันสลับโหมดการลงชื่อ
+        function switchSignatureMode(mode) {
+            currentSigMode = mode;
+            const drawBtn = document.getElementById('btnSigDraw');
+            const uploadBtn = document.getElementById('btnSigUpload');
+            const drawDiv = document.getElementById('sigDrawContainer');
+            const uploadDiv = document.getElementById('sigUploadContainer');
+
+            if (mode === 'draw') {
+                drawBtn.className = "px-3 py-1 bg-blue-700 text-white rounded text-xs font-semibold transition hover:bg-blue-800";
+                uploadBtn.className = "px-3 py-1 bg-slate-200 text-slate-700 rounded text-xs font-semibold transition hover:bg-slate-300";
+                drawDiv.classList.remove('hidden');
+                uploadDiv.classList.add('hidden');
+            } else {
+                drawBtn.className = "px-3 py-1 bg-slate-200 text-slate-700 rounded text-xs font-semibold transition hover:bg-slate-300";
+                uploadBtn.className = "px-3 py-1 bg-blue-700 text-white rounded text-xs font-semibold transition hover:bg-blue-800";
+                drawDiv.classList.add('hidden');
+                uploadDiv.classList.remove('hidden');
+            }
+        }
+
+        // อัปโหลดและพรีวิวลายเซ็นที่มีอยู่แล้ว
+        function previewSignatureFile(input) {
+            const file = input.files[0];
+            const sigImage = document.getElementById('sigImage');
+            const sigPlaceholder = document.getElementById('sigPlaceholder');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    sigImage.src = e.target.result;
+                    sigImage.classList.remove('hidden');
+                    sigPlaceholder.classList.add('hidden');
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function clearSignature() {
+            ctx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
+            const sigImage = document.getElementById('sigImage');
+            const sigPlaceholder = document.getElementById('sigPlaceholder');
+            sigImage.src = "";
+            sigImage.classList.add('hidden');
+            sigPlaceholder.classList.remove('hidden');
+            document.getElementById('sigFile').value = "";
+        }
+
+        function updateSignaturePreview() {
+            const dataURL = sigCanvas.toDataURL();
+            const sigImage = document.getElementById('sigImage');
+            const sigPlaceholder = document.getElementById('sigPlaceholder');
+            if (dataURL && currentSigMode === 'draw') {
+                sigImage.src = dataURL;
+                sigImage.classList.remove('hidden');
+                sigPlaceholder.classList.add('hidden');
+            }
+        }
+
+        function resetForm() {
+            if (confirm("ต้องการเคลียร์ข้อมูลทั้งหมดเพื่อเริ่มเขียนรายงานฉบับใหม่ใช่หรือไม่?")) {
+                document.getElementById('pointsContainer').innerHTML = "";
+                pointCount = 0;
+                clearSignature();
+                addMeasurementPoint();
+                
+                document.getElementById('companyLogo').value = "";
+                document.getElementById('logoPreview').classList.add('hidden');
+                document.getElementById('logoPlaceholder').classList.remove('hidden');
+                document.getElementById('logoPrint').style.display = "none";
+                document.getElementById('logoPrintText').style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
